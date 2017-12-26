@@ -3,15 +3,22 @@
 
 <template>
   <div id="app">
-    <div class="connect">
-      <a href="/login">Login</a>
+    <div class="topbar">
+      <div class="connect">
+        <a href="/login">Login</a>
+      </div>
     </div>
-    <router-view/>
+    <dashboard></dashboard>
   </div>
 </template>
 
 <script>
+import Dashboard from './components/Dashboard.vue'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Dashboard
+  }
 }
 </script>

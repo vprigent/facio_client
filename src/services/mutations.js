@@ -2,9 +2,11 @@ import axios from 'axios'
 import qs from 'qs'
 
 import router from '@/router'
+import Project from '@/models/project.js'
 import List from '@/models/list.js'
 import Item from '@/models/item.js'
 import User from '@/models/user.js'
+
 
 axios.defaults.baseURL = 'http://localhost:4000/'
 axios.defaults.withCredentials = true
@@ -14,14 +16,24 @@ export const STORAGE_KEY = 'facio-webclient'
 export const state = {
   items: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-items') || '[]'),
   lists: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-lists') || '[]'),
+  projects: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-projects') || '[]'),
   last_list_id: window.localStorage.getItem(STORAGE_KEY + '-last-list-id') || 0,
   last_item_id: window.localStorage.getItem(STORAGE_KEY + '-last-item-id') || 0,
+  last_project_id: window.localStorage.getItem(STORAGE_KEY + '-last-project-id') || 0,
   current_user: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-user') || null)
 }
 
 export const mutations = {
   createUser (state, attrs) {
     state.current_user = new User(attrs.id, attrs.email)
+  },
+
+  createProject (state, attrs) {
+    state.projects.push(new Project(
+      ++state.last_project_id,
+      attrs['title']
+    )
+    )
   },
 
   createList (state, attrs) {
@@ -68,6 +80,10 @@ export const mutations = {
 }
 
 export const actions = {
+  newProject (context, attrs) {
+    context.commit('createProject', attrs)
+  },
+
   newList (context, attrs) {
     context.commit('createList', attrs)
   },
@@ -112,6 +128,11 @@ export const getters = {
   itemsForList: (state) => (listId) => {
     return state.items.filter((i) => { return i.listId === listId })
   },
+
+  getProject: (state) => (projectId) => {
+    return state.projects.map(project =>  project.id == projectId)[0]
+  },
+
   getUser: (state) => {
     return state.current_user
   }
