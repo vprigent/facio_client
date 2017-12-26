@@ -1,4 +1,8 @@
-#app
+@import './node_modules/skeleton-scss/scss/skeleton'
+@import './src/assets/styles/override'
+
+body
+  margin: 0
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
@@ -9,22 +13,20 @@ h1, h2
 
 .lists
   display: flex
-  margin-top: 0.4em
 
-.list
-  width: 280px
-  display: inline-block
-  margin: .4em
-  border: 1px solid grey
-  padding: .8em
-  box-shadow: 0 10px 6px -6px #777
+  .list
+    width: 280px
+    display: inline-block
+    margin: .4em
+    border: 1px solid grey
+    padding: .8em
+    box-shadow: 0 10px 6px -6px #777
 
-  .title
-    margin-bottom: 1em
+    .title
+      margin-bottom: 1em
 
-  .actions
-    float: right
-
+    .actions
+      float: right
 
 a
   color: #42b983
@@ -33,4 +35,9 @@ a
   .actions
     float: right
 
-.list
+.container
+  width: 100%
+  max-width: none
+
+.sidebar
+  padding: 0.4em
