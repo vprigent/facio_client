@@ -1,18 +1,22 @@
+import router from '@/router'
+import List from '@/models/list.js'
+import Item from '@/models/item.js'
 export const STORAGE_KEY = 'facio-webclient'
 
 export const state = {
   items: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-items') || '[]'),
   lists: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-lists') || '[]'),
-  last_item_id: 0,
-  last_list_id: 0
+  last_list_id: window.localStorage.getItem(STORAGE_KEY + '-last-list-id') || 0,
+  last_item_id: window.localStorage.getItem(STORAGE_KEY + '-last-item-id') || 0,
 }
 
 export const mutations = {
   createList (state, attrs) {
-    state.lists.push({
-      id: ++state.last_list_id,
-      title: attrs['title']
-    })
+    state.lists.push(new List(
+      ++state.last_list_id,
+      attrs['title']
+    )
+    )
   },
 
   destroyList (state, list) {
@@ -28,11 +32,11 @@ export const mutations = {
   },
 
   createItem (state, attrs) {
-    state.items.push({
-      id: ++state.last_item_id,
-      label: attrs['label'],
-      list_id: attrs['list_id']
-    })
+    state.items.push(new Item(
+      ++state.last_item_id,
+      attrs['label'],
+      attrs['list_id']
+    ))
   },
 
   destroyItem (state, { item }) {
@@ -78,6 +82,7 @@ export const actions = {
 
 export const getters = {
   itemsForList: (state) => (listId) => {
-    return state.items.filter((i) => { return i.list_id === listId })
+    return state.items.filter((i) => { return i.listId === listId })
+  },
   }
 }
