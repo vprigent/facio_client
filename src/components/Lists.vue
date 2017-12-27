@@ -27,8 +27,12 @@ export default {
   },
   data () {
     return {
-      lists: store.state.lists,
       currentList: null
+    }
+  },
+  computed: {
+    lists () {
+      return store.getters.getCurrentLists
     }
   },
   methods: {
@@ -39,7 +43,7 @@ export default {
       this.currentList = {title: 'New List'}
     },
     submit: function (e) {
-      this.currentList = {title: e.target.value}
+      this.currentList = {title: e.target.value, project_id: store.state.current_project.id}
       this.newList(this.currentList)
       this.currentList = null
     }

@@ -6,8 +6,11 @@
     <div class='project'
         v-for="project in projects"
         :key="project.id"
-        :project="project">
-      <div class="title" v-bind:id="project.id" @click="changeProject">
+        @click="changeProject"
+        >
+      <div class="title"
+        :class="{ active : isActive(project) }"
+        v-bind:data-project-id="project.id">
         {{ project.title }}
         <span class="actions">
         </span>
@@ -25,24 +28,29 @@ export default {
   name: 'projects',
   data() {
     return {
-      projects: store.state.projects,
-      currentProject: null
+      projects: store.state.projects
+    }
+  },
+  computed: {
+    currentProject () {
+      return store.state.current_project
     }
   },
   methods: {
     ...mapActions([
-      'newProject'
+      'newProject',
+      'changeCurrentProject'
     ]),
-    gotoProject: function (project_id) {
-      this.currentProject = store.getters.getProject(project_id)
-    },
     submit: function(e) {
       this.currentProject = {title: e.target.value}
       this.newProject(this.currentProject)
     },
     changeProject: function(e) {
-      project_id = e.target.getAttribute('project-id')
-      this.currentProject = store.getters.getProject(project_id)
+      var project_id = e.target.dataset.projectId
+      this.changeCurrentProject(store.getters.getProject(project_id))
+    },
+    isActive: function (project) {
+      return this.currentProject.id === project.id
     }
   }
 }

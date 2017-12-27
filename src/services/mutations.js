@@ -20,7 +20,8 @@ export const state = {
   last_list_id: window.localStorage.getItem(STORAGE_KEY + '-last-list-id') || 0,
   last_item_id: window.localStorage.getItem(STORAGE_KEY + '-last-item-id') || 0,
   last_project_id: window.localStorage.getItem(STORAGE_KEY + '-last-project-id') || 0,
-  current_user: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-user') || null)
+  current_user: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-user') || null),
+  current_project: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-project') || null)
 }
 
 export const mutations = {
@@ -39,7 +40,8 @@ export const mutations = {
   createList (state, attrs) {
     state.lists.push(new List(
       ++state.last_list_id,
-      attrs['title']
+      attrs['title'],
+      attrs['project_id']
     )
     )
   },
@@ -76,12 +78,17 @@ export const mutations = {
     state.items.forEach((todo) => {
       todo.done = done
     })
+  },
+
+  setCurrentProject (state, project) {
+    state.current_project = project
   }
 }
 
 export const actions = {
   newProject (context, attrs) {
     context.commit('createProject', attrs)
+    return getters.getProject(attrs['id'])
   },
 
   newList (context, attrs) {
@@ -108,6 +115,10 @@ export const actions = {
     context.commit('createItem', attrs)
   },
 
+  changeCurrentProject (context, project) {
+    context.commit('setCurrentProject', project)
+  },
+
   loginUser (context, attrs) {
     axios({
       method: 'post',
@@ -129,8 +140,12 @@ export const getters = {
     return state.items.filter((i) => { return i.listId === listId })
   },
 
+  getCurrentLists: (state) => {
+    return state.lists.filter((l) => { return l.project_id === state.current_project.id })
+  },
+
   getProject: (state) => (projectId) => {
-    return state.projects.map(project =>  project.id == projectId)[0]
+    return state.projects.filter(project =>  project.id == projectId)[0]
   },
 
   getUser: (state) => {

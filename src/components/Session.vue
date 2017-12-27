@@ -32,7 +32,6 @@ export default {
       'loginUser'
     ]),
     submit: function (e) {
-
       var attrs = {user: {email: this.email, password: this.password}}
       this.loginUser(attrs)
     }
