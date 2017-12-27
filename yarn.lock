@@ -5939,10 +5939,6 @@ sinon@^4.0.0:
     supports-color "^4.4.0"
     type-detect "^4.0.5"
 
-skeleton-scss@^2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/skeleton-scss/-/skeleton-scss-2.0.4.tgz#79b52e1e1ab2067e9fa5c681ad18f36b48b26470"
-
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
