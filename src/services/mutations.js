@@ -32,7 +32,7 @@ export const mutations = {
   createProject (state, attrs) {
     state.projects.push(new Project(
       ++state.last_project_id,
-      attrs['title']
+      attrs['name']
     )
     )
   },
@@ -87,8 +87,12 @@ export const mutations = {
 
 export const actions = {
   newProject (context, attrs) {
+    axios({
+      method: 'post',
+      url: '/projects',
+      data: qs.stringify({project: attrs})
+    })
     context.commit('createProject', attrs)
-    return getters.getProject(attrs['id'])
   },
 
   newList (context, attrs) {

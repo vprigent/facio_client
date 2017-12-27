@@ -1,17 +1,17 @@
 <template>
   <div class="projects">
     <div class="project new-project">
-      <input type="text" name="title" value="" placeholder="New project" @keydown.enter="submit">
+      <input type="text" name="name" value="" placeholder="New project" @keydown.enter="submit">
     </div>
     <div class='project'
         v-for="project in projects"
         :key="project.id"
         @click="changeProject"
         >
-      <div class="title"
+      <div class="name"
         :class="{ active : isActive(project) }"
         v-bind:data-project-id="project.id">
-        {{ project.title }}
+        {{ project.name }}
         <span class="actions">
         </span>
       </div>
@@ -42,15 +42,14 @@ export default {
       'changeCurrentProject'
     ]),
     submit: function(e) {
-      this.currentProject = {title: e.target.value}
-      this.newProject(this.currentProject)
+      this.newProject({name: e.target.value})
     },
     changeProject: function(e) {
       var project_id = e.target.dataset.projectId
       this.changeCurrentProject(store.getters.getProject(project_id))
     },
     isActive: function (project) {
-      return this.currentProject.id === project.id
+      return this.currentProject != null && this.currentProject.id === project.id
     }
   }
 }
