@@ -54,7 +54,7 @@ export const mutations = {
     list.title = attrs['title']
   },
 
-  toggleItem (state, { item }) {
+  toggleItem (state, item ) {
     item.done = !item.done
   },
 
@@ -132,6 +132,10 @@ export const actions = {
     .catch(function (error) {
       console.log(error)
     });
+  },
+
+  checkItem (context, item) {
+    context.commit('toggleItem', item)
   }
 }
 
