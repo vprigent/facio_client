@@ -1,8 +1,8 @@
 export default class Item {
-  constructor (id, label, done, listId) {
+  constructor (id, label, listId) {
     this.id = id
     this.label = label
-    this.done = done
+    this.done = false
     this.listId = listId
   }
 }

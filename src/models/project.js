@@ -1,6 +1,6 @@
 export default class Project {
-  constructor (id, title) {
+  constructor (id, name) {
     this.id = id
-    this.title = title
+    this.name = name
   }
 }

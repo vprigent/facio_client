@@ -1,6 +1,6 @@
 <template>
   <div class="list-item">
-    <input :id="'check-item-' + item.id" v-on:change="toggleItem(item)" v-model="done" type="checkbox">
+    <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
     <label :for="'check-item-' + item.id">{{ item.label }}</label>
     <span class="actions">
       <a href='#' class="edit" v-on:click="editItem(item)">Edit</a>
@@ -15,10 +15,15 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'item',
-  props: ['item', 'key'],
+  props: ['item'],
   computed: {
-    done() {
-      return this.item.done
+    done: {
+      get: function() {
+        return this.item.done
+      },
+      set: function(value) {
+        this.toggleItem(this.item)
+      }
     }
   },
   methods: {
