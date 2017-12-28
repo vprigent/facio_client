@@ -50,10 +50,6 @@ export const mutations = {
     state.lists.splice(state.lists.indexOf(list), 1)
   },
 
-  updateList (state, { list, attrs }) {
-    list.title = attrs['title']
-  },
-
   toggleItem (state, item ) {
     item.done = !item.done
   },
@@ -68,16 +64,6 @@ export const mutations = {
 
   destroyItem (state, { item }) {
     state.items.splice(state.items.indexOf(item), 1)
-  },
-
-  updateItem (state, { item, attrs }) {
-    item.label = attrs['label']
-  },
-
-  toggleAll (state, { done }) {
-    state.items.forEach((todo) => {
-      todo.done = done
-    })
   },
 
   setCurrentProject (state, project) {
@@ -101,10 +87,6 @@ export const actions = {
 
   deleteList (context, list) {
     context.commit('destroyList', list)
-  },
-
-  editList (context, { list, attrs }) {
-    context.commit('updateList', list, attrs)
   },
 
   deleteItem (context, item) {

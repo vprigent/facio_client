@@ -3,7 +3,6 @@
     <div class="title" v-bind:id="list.id">
       {{ list.title }}
       <span class="actions">
-        <a href='#' class="edit" v-on:click="changeList(list)">Edit list</a>
         <a href='#' class="delete" v-on:click="removeList(list)">Delete list</a>
       </span>
     </div>
