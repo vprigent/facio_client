@@ -8,13 +8,13 @@
         :key="project.id"
         @click="changeProject"
         >
-      <div class="name"
+      <a class="name"
         :class="{ active : isActive(project) }"
         v-bind:data-project-id="project.id">
         {{ project.name }}
         <span class="actions">
         </span>
-      </div>
+      </a>
     </div>
   </div>
 </template>

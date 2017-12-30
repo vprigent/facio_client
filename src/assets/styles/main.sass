@@ -1,3 +1,4 @@
+@import './src/assets/styles/variables'
 @import './src/assets/styles/override'
 
 body
@@ -5,47 +6,94 @@ body
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  color: #2c3e50
+  color: $color-grey-darker
 
 h1, h2
   font-weight: normal
 
+.topbar
+  height: 25px
+  padding: 5px
+  background-color: $color-blue-light
+
+  a
+    color: $color-grey-lighter
+    &:hover
+      color: $color-grey-light
+
+
 .sidebar
-  float: left
+  padding: 0.4em
+  background-color: $color-grey-dark
+  color: $color-grey-lighter
+
+  a
+    color: $color-grey-lighter
+    &:hover
+      color: $color-grey-light
+      color: $color-grey-light
+
+.dashboard
+  min-height: 95vh
+  display: flex
+  background-color: $color-grey
+
+.connect
+  float: right
 
 .lists
   display: flex
 
   .list
-    width: 280px
-    display: inline-block
-    margin: .4em
-    border: 1px solid grey
+    display: flex
+    flex-direction: column
+    flex: 0 0 280px
+    border-left: 1px solid $color-grey-medium
     padding: .8em
-    box-shadow: 0 5px 3px -3px #777
 
     .title
       margin-bottom: 1em
+      font-weight: bold
 
     .actions
       float: right
 
-a
-  color: #42b983
+  .add-list
+    font-weight: bold
 
-.list-item
-  label
-    display: inline-block
-  .actions
-    float: right
+.items
+  .item
+    box-shadow: 0 5px 2px -4px $color-grey-medium
+    margin: .6em 0
+    padding: .4em .4em .2em .4em
+    background-color: white
+    border: 1px solid white
+    border-radius: 2px
+
+    input:checked + label
+      text-decoration: line-through
+
+    label
+      display: inline-block
+    .actions
+      float: right
+
+a
+  color: $color-blue
+  text-decoration: none
+  &:hover
+    color: $color-blue-green
 
 .container
   width: 100%
   max-width: none
 
-.sidebar
-  padding: 0.4em
-
 .project
   .active
-    background-color: #eee
+    color: $color-green
+
+.session
+  margin: 0 auto
+  form
+    label
+      min-width: 100px

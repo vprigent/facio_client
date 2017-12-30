@@ -1,13 +1,13 @@
 <template>
   <div class='list'>
-    <div class="title" v-bind:id="list.id">
+    <div class="title" v-bind:id="'list-' + list.id">
       {{ list.title }}
       <span class="actions">
         <a href='#' class="delete" v-on:click="removeList(list)">Delete list</a>
       </span>
     </div>
     <div class="items">
-      <div class="item new-item">
+      <div class="new-item">
         <input type="text" name="label" value="" placeholder="New item" @keydown.enter="submit">
       </div>
       <item

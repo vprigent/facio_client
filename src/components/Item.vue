@@ -1,5 +1,5 @@
 <template>
-  <div class="list-item">
+  <div class="item">
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
     <label :for="'check-item-' + item.id">{{ item.label }}</label>
     <span class="actions">
