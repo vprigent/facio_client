@@ -1,4 +1,8 @@
 @import './src/assets/styles/variables'
+@import './src/assets/styles/components/sidebar'
+@import './src/assets/styles/components/lists'
+@import './src/assets/styles/components/items'
+@import './src/assets/styles/components/projects'
 @import './src/assets/styles/override'
 
 body
@@ -21,62 +25,13 @@ h1, h2
     &:hover
       color: $color-grey-light
 
-
-.sidebar
-  padding: 0.4em
-  background-color: $color-grey-dark
-  color: $color-grey-lighter
-
-  a
-    color: $color-grey-lighter
-    &:hover
-      color: $color-grey-light
-      color: $color-grey-light
+  .connect
+    float: right
 
 .dashboard
   min-height: 95vh
   display: flex
   background-color: $color-grey
-
-.connect
-  float: right
-
-.lists
-  display: flex
-
-  .list
-    display: flex
-    flex-direction: column
-    flex: 0 0 280px
-    border-left: 1px solid $color-grey-medium
-    padding: .8em
-
-    .title
-      margin-bottom: 1em
-      font-weight: bold
-
-    .actions
-      float: right
-
-  .add-list
-    font-weight: bold
-
-.items
-  .item
-    box-shadow: 0 5px 2px -4px $color-grey-medium
-    margin: .6em 0
-    padding: .4em .4em .2em .4em
-    background-color: white
-    border: 1px solid white
-    border-radius: 2px
-
-    input:checked + label
-      text-decoration: line-through
-
-    label
-      display: inline-block
-    .actions
-      float: right
 
 a
   color: $color-blue
@@ -87,13 +42,3 @@ a
 .container
   width: 100%
   max-width: none
-
-.project
-  .active
-    color: $color-green
-
-.session
-  margin: 0 auto
-  form
-    label
-      min-width: 100px
