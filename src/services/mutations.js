@@ -93,10 +93,6 @@ export const actions = {
     context.commit('destroyItem', item)
   },
 
-  toggleItem (context, { item }) {
-    item.done = !item.done
-  },
-
   newItem (context, attrs) {
     context.commit('createItem', attrs)
   },
