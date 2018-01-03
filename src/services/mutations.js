@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import uuid from 'uuid/v4'
 
 import router from '@/router'
 import Project from '@/models/project.js'
@@ -17,9 +18,6 @@ export const state = {
   items: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-items') || '[]'),
   lists: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-lists') || '[]'),
   projects: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-projects') || '[]'),
-  last_list_id: window.localStorage.getItem(STORAGE_KEY + '-last-list-id') || 0,
-  last_item_id: window.localStorage.getItem(STORAGE_KEY + '-last-item-id') || 0,
-  last_project_id: window.localStorage.getItem(STORAGE_KEY + '-last-project-id') || 0,
   current_user: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-user') || null),
   current_project: JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-project') || null)
 }
@@ -29,21 +27,12 @@ export const mutations = {
     state.current_user = new User(attrs.id, attrs.email)
   },
 
-  createProject (state, attrs) {
-    state.projects.push(new Project(
-      ++state.last_project_id,
-      attrs['name']
-    )
-    )
+  createProject (state, project) {
+    state.projects.push(project)
   },
 
-  createList (state, attrs) {
-    state.lists.push(new List(
-      ++state.last_list_id,
-      attrs['title'],
-      attrs['project_id']
-    )
-    )
+  createList (state, list) {
+    state.lists.push(list)
   },
 
   destroyList (state, list) {
@@ -54,12 +43,8 @@ export const mutations = {
     item.done = !item.done
   },
 
-  createItem (state, attrs) {
-    state.items.push(new Item(
-      ++state.last_item_id,
-      attrs['label'],
-      attrs['list_id']
-    ))
+  createItem (state, item) {
+    state.items.push(item)
   },
 
   destroyItem (state, { item }) {
@@ -73,16 +58,15 @@ export const mutations = {
 
 export const actions = {
   newProject (context, attrs) {
-    axios({
-      method: 'post',
-      url: '/projects',
-      data: qs.stringify({project: attrs})
-    })
-    context.commit('createProject', attrs)
+    Project.create(context, attrs)
   },
 
   newList (context, attrs) {
-    context.commit('createList', attrs)
+    List.create(context, attrs)
+  },
+
+  newItem (context, attrs) {
+    Item.create(context, attrs)
   },
 
   deleteList (context, list) {
@@ -91,10 +75,6 @@ export const actions = {
 
   deleteItem (context, item) {
     context.commit('destroyItem', item)
-  },
-
-  newItem (context, attrs) {
-    context.commit('createItem', attrs)
   },
 
   changeCurrentProject (context, project) {
@@ -123,7 +103,7 @@ export const actions = {
 
 export const getters = {
   itemsForList: (state) => (listId) => {
-    return state.items.filter((i) => { return i.listId === listId })
+    return state.items.filter((i) => { return i.list_id === listId })
   },
 
   getCurrentLists: (state) => {

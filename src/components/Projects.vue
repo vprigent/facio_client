@@ -49,7 +49,7 @@ export default {
       this.changeCurrentProject(store.getters.getProject(project_id))
     },
     isActive: function (project) {
-      return this.currentProject != null && this.currentProject.id === project.id
+      return this.currentProject !== null && this.currentProject.id === project.id
     }
   }
 }
