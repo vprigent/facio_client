@@ -27,6 +27,10 @@ export const mutations = {
     state.current_user = new User(attrs.id, attrs.email)
   },
 
+  deleteUser (state) {
+    state.current_user = null
+  },
+
   createProject (state, project) {
     state.projects.push(project)
   },
@@ -93,7 +97,20 @@ export const actions = {
     })
     .catch(function (error) {
       console.log(error)
-    });
+    })
+  },
+
+  logoutUser (context, attrs) {
+    axios({
+      method: 'delete',
+      url: '/users/logout'
+    })
+    .then(function (response) {
+      context.commit('deleteUser')
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
   },
 
   checkItem (context, item) {
