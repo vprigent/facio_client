@@ -26,7 +26,7 @@ import store from '@/services/store.js'
 
 export default {
   name: 'projects',
-  data() {
+  data () {
     return {
       projects: store.state.projects
     }
@@ -41,12 +41,12 @@ export default {
       'newProject',
       'changeCurrentProject'
     ]),
-    submit: function(e) {
+    submit: function (e) {
       this.newProject({name: e.target.value})
     },
-    changeProject: function(e) {
-      var project_id = e.target.dataset.projectId
-      this.changeCurrentProject(store.getters.getProject(project_id))
+    changeProject: function (e) {
+      var projectId = e.target.dataset.projectId
+      this.changeCurrentProject(store.getters.getProject(projectId))
     },
     isActive: function (project) {
       return this.currentProject !== null && this.currentProject.id === project.id

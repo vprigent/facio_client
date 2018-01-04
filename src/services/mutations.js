@@ -8,7 +8,6 @@ import List from '@/models/list.js'
 import Item from '@/models/item.js'
 import User from '@/models/user.js'
 
-
 axios.defaults.baseURL = 'http://localhost:4000/'
 axios.defaults.withCredentials = true
 
@@ -39,11 +38,11 @@ export const mutations = {
     state.lists.push(list)
   },
 
-  destroyList (state, list) {
-    state.lists.splice(state.lists.indexOf(list), 1)
+  destroyList (state, listId) {
+    state.lists.splice(state.lists.indexOf(listId), 1)
   },
 
-  toggleItem (state, item ) {
+  toggleItem (state, item) {
     item.done = !item.done
   },
 
@@ -51,8 +50,8 @@ export const mutations = {
     state.items.push(item)
   },
 
-  destroyItem (state, { item }) {
-    state.items.splice(state.items.indexOf(item), 1)
+  destroyItem (state, itemId) {
+    state.items.splice(state.items.indexOf(itemId), 1)
   },
 
   setCurrentProject (state, project) {
@@ -74,11 +73,11 @@ export const actions = {
   },
 
   deleteList (context, list) {
-    context.commit('destroyList', list)
+    List.destroy(context, list.id)
   },
 
   deleteItem (context, item) {
-    context.commit('destroyItem', item)
+    Item.destroy(context, item.id)
   },
 
   changeCurrentProject (context, project) {
@@ -128,7 +127,7 @@ export const getters = {
   },
 
   getProject: (state) => (projectId) => {
-    return state.projects.filter(project =>  project.id == projectId)[0]
+    return state.projects.filter(project => project.id === projectId)[0]
   },
 
   getUser: (state) => {

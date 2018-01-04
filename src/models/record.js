@@ -6,9 +6,6 @@ axios.defaults.withCredentials = true
 
 export default class Record {
 
-  constructor() {
-  }
-
 }
 
 Record.create = function (context, attrs) {
@@ -20,29 +17,38 @@ Record.create = function (context, attrs) {
 
   return axios({
     method: 'post',
-    url: "/" + this.tableName,
+    url: '/' + this.tableName,
     data: qs.stringify(attributes)
-  }).then(function(response) {
+  })
+  .then(function (response) {
     context.commit('create' + self.name, new self(response.data.data))
   })
-  .catch(function(error) {
+  .catch(function (error) {
     console.log(error)
   })
-
 }
 
 Record.update = function () {
   // todo
 }
 
-Record.destroy = function () {
-  // todo
+Record.destroy = function (context, id) {
+  return axios({
+    method: 'delete',
+    url: '/' + this.tableName + '/' + id
+  })
+  .then(function (response) {
+    context.commit('destroy' + self.name, id)
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
 }
 
-Record.attributesHash = function(attrs) {
+Record.attributesHash = function (attrs) {
   var hash = {}
 
-  for(var i = 0; i < this.attributes.length; i ++) {
+  for (var i = 0; i < this.attributes.length; i++) {
     if (attrs[this.attributes[i]] !== undefined) {
       hash[this.attributes[i]] = attrs[this.attributes[i]]
     }

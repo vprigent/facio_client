@@ -19,6 +19,8 @@ module.exports = {
   rules: {
     // allow async-await
     'generator-star-spacing': 'off',
+    'new-cap': ["error", { "newIsCap": false }],
+    'no-multiple-empty-lines': ["error", { "max": 1, "maxEOF": 1 }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }

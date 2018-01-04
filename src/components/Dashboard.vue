@@ -8,10 +8,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 
 import Projects from './Projects.vue'
-import store from '@/services/store.js'
 
 export default {
   name: 'Dashboard',

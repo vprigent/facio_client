@@ -17,10 +17,10 @@ export default {
   props: ['item'],
   computed: {
     done: {
-      get: function() {
+      get: function () {
         return this.item.done
       },
-      set: function(value) {
+      set: function (value) {
         this.toggleItem(this.item)
       }
     }
