@@ -21,7 +21,7 @@ import List from './List.vue'
 import store from '@/services/store.js'
 
 export default {
-  name: 'Lists',
+  name: 'Project',
   components: {
     List
   },

@@ -6,15 +6,10 @@
     <div class='project'
         v-for="project in projects"
         :key="project.id"
-        @click="changeProject"
         >
-      <a class="name"
-        :class="{ active : isActive(project) }"
-        v-bind:data-project-id="project.id">
+      <router-link :to="{ name: 'Project', params: {projectId: project.id} }" v-on:click.native="changeProject(project.id)" :class="{ active : isActive(project) }">
         {{ project.name }}
-        <span class="actions">
-        </span>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -44,8 +39,7 @@ export default {
     submit: function (e) {
       this.newProject({name: e.target.value})
     },
-    changeProject: function (e) {
-      var projectId = e.target.dataset.projectId
+    changeProject: function (projectId) {
       this.changeCurrentProject(store.getters.getProject(projectId))
     },
     isActive: function (project) {
