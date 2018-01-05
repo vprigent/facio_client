@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 import store from '@/services/store.js'
 
@@ -33,14 +33,16 @@ export default {
   },
   methods: {
     ...mapActions([
-      'newProject',
-      'changeCurrentProject'
+      'newProject'
+    ]),
+    ...mapMutations([
+      'setCurrentProject'
     ]),
     submit: function (e) {
       this.newProject({name: e.target.value})
     },
     changeProject: function (projectId) {
-      this.changeCurrentProject(store.getters.getProject(projectId))
+      this.setCurrentProject(store.getters.getProject(projectId))
     },
     isActive: function (project) {
       return this.currentProject !== null && this.currentProject.id === project.id
