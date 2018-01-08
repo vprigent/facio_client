@@ -2,19 +2,26 @@
   <div class="item">
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
     <label :for="'check-item-' + item.id">{{ item.label }}</label>
-    <span class="actions">
-      <a href='#' class="delete" v-on:click="removeItem(item)">Delete</a>
-    </span>
+
+    <submenu class="pull-right">
+      <div class="actions submenu">
+        <a href='#' class="delete" v-on:click="removeItem(item)">Delete</a>
+      </div>
+    </submenu>
     <div class="desc">{{ item.description }}</div>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import Submenu from './utils/Submenu.vue'
 
 export default {
   name: 'item',
   props: ['item'],
+  components: {
+    Submenu
+  },
   computed: {
     done: {
       get: function () {

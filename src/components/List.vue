@@ -2,10 +2,14 @@
   <div class='list'>
     <div class="title" v-bind:id="'list-' + list.id">
       {{ list.title }}
-      <span class="actions">
-        <a href='#' class="delete" v-on:click="removeList(list)">Delete list</a>
-      </span>
+
+      <submenu class="pull-right">
+        <div class="actions submenu">
+          <a href='#' class="delete" v-on:click="removeList(list)">Delete list</a>
+        </div>
+      </submenu>
     </div>
+
     <div class="items">
       <div class="new-item">
         <input type="text" name="label" value="" placeholder="New item" @keydown.enter="submit">
@@ -24,6 +28,7 @@
 import { mapActions } from 'vuex'
 
 import Item from './Item.vue'
+import Submenu from './utils/Submenu.vue'
 
 import store from '@/services/store.js'
 
@@ -31,7 +36,8 @@ export default {
   name: 'list',
   props: ['list'],
   components: {
-    'item': Item
+    Item,
+    Submenu
   },
   computed: {
     items () {
