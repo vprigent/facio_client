@@ -33,6 +33,8 @@ Record.update = function () {
 }
 
 Record.destroy = function (context, id) {
+  var self = this
+
   return axios({
     method: 'delete',
     url: '/' + this.tableName + '/' + id
