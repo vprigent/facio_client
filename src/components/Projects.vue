@@ -10,6 +10,12 @@
       <router-link :to="{ name: 'Project', params: {projectId: project.id} }" v-on:click.native="changeProject(project.id)" :class="{ active : isActive(project) }">
         {{ project.name }}
       </router-link>
+
+      <submenu class="pull-right">
+        <div class="actions submenu">
+          <a href='#' class="delete" v-on:click="removeProject(project)">Delete Project</a>
+        </div>
+      </submenu>
     </div>
   </div>
 </template>
@@ -18,9 +24,13 @@
 import { mapActions, mapMutations } from 'vuex'
 
 import store from '@/services/store.js'
+import Submenu from './utils/Submenu.vue'
 
 export default {
   name: 'projects',
+  components: {
+    Submenu
+  },
   data () {
     return {
       projects: store.state.projects
@@ -33,7 +43,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'newProject'
+      'newProject',
+      'deleteProject'
     ]),
     ...mapMutations([
       'setCurrentProject'
@@ -46,6 +57,9 @@ export default {
     },
     isActive: function (project) {
       return this.currentProject !== null && this.currentProject.id === project.id
+    },
+    removeProject: function (project) {
+      this.deleteProject(project)
     }
   }
 }

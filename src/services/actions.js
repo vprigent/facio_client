@@ -29,6 +29,10 @@ export const deleteItem = (context, item) => {
   Item.destroy(context, item.id)
 }
 
+export const deleteProject = (context, project) => {
+  Project.destroy(context, project.id)
+}
+
 export const loginUser = (context, attrs) => {
   axios({
     method: 'post',
