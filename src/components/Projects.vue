@@ -7,7 +7,7 @@
         v-for="project in projects"
         :key="project.id"
         >
-      <router-link :to="{ name: 'Project', params: {projectId: project.id} }" v-on:click.native="changeProject(project.id)" :class="{ active : isActive(project) }">
+      <router-link :to="{ name: 'Project', params: {projectId: project.id} }" @click.native="changeProject(project.id)" :class="{ active : isActive(project) }">
         {{ project.name }}
       </router-link>
 
@@ -31,14 +31,12 @@ export default {
   components: {
     Submenu
   },
-  data () {
-    return {
-      projects: store.state.projects
-    }
-  },
   computed: {
     currentProject () {
       return store.state.current_project
+    },
+    projects () {
+      return store.getters.getProjects
     }
   },
   methods: {

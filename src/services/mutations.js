@@ -13,6 +13,13 @@ export default {
     state.projects.push(project)
   },
 
+  destroyProject (state, projectId) {
+    var index = state.projects.indexOf(state.projects.filter(project => project.id === projectId)[0])
+    if (index > -1) {
+      state.projects.splice(index, 1)
+    }
+  },
+
   createList (state, list) {
     state.lists.push(list)
   },
