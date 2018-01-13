@@ -9,9 +9,8 @@ export default class Record {
 }
 
 Record.create = function (context, attrs) {
-  var resourceName = this.name.toLowerCase()
   var attributes = {}
-  attributes[resourceName] = this.attributesHash(attrs)
+  attributes[this.resourceName()] = this.attributesHash(attrs)
 
   var self = this
 
@@ -28,8 +27,27 @@ Record.create = function (context, attrs) {
   })
 }
 
-Record.update = function () {
-  // todo
+Record.update = function (context, attrs) {
+  var record = attrs.record
+  delete attrs['record']
+
+  var self = this
+
+  var attributes = {}
+  attributes[this.resourceName()] = this.attributesHash(attrs)
+
+  return axios({
+    method: 'patch',
+    url: '/' + this.tableName + '/' + record.id,
+    data: qs.stringify(attributes)
+  })
+  .then(function (response) {
+    self.assignAttributes(record, attrs)
+    context.commit('update' + self.name, record)
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
 }
 
 Record.destroy = function (context, id) {
@@ -47,6 +65,18 @@ Record.destroy = function (context, id) {
   })
 }
 
+Record.assignAttributes = function (record, attrs) {
+  var attributes = this.attributesHash(attrs)
+
+  Object.keys(attributes).forEach(function (key) {
+    if (record[key] !== undefined) {
+      record[key] = attributes[key]
+    }
+  })
+
+  return record
+}
+
 Record.attributesHash = function (attrs) {
   var hash = {}
 
@@ -57,4 +87,8 @@ Record.attributesHash = function (attrs) {
   }
 
   return hash
+}
+
+Record.resourceName = function () {
+  return this.name.toLowerCase()
 }

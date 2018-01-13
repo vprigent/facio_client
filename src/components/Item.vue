@@ -1,5 +1,9 @@
 <template>
-  <div class="item">
+  <li class="item"
+    draggable
+    @dragstart="dragItem($event, item)"
+    @dragend="dropItem($event, item)"
+    >
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
     <label :for="'check-item-' + item.id">{{ item.label }}</label>
 
@@ -9,7 +13,7 @@
       </div>
     </submenu>
     <div class="desc">{{ item.description }}</div>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -42,6 +46,13 @@ export default {
     },
     removeItem: function (item) {
       this.deleteItem(item)
+    },
+    dragItem: function (event, item) {
+      event.target.classList.add('dragged')
+      event.dataTransfer.setData('text/plain', item.id)
+    },
+    dropItem: function (event, item) {
+      event.target.classList.remove('dragged')
     }
   }
 }

@@ -10,7 +10,9 @@
       </submenu>
     </div>
 
-    <div class="items">
+    <ul class="items"
+      @drop="dropItem($event)"
+      @dragover="dragOverItem($event)">
       <div class="new-item">
         <input type="text" name="label" value="" placeholder="New item" @keydown.enter="submit">
       </div>
@@ -19,13 +21,13 @@
           :key="item.id"
           :item="item">
       </item>
-    </div>
+    </ul>
   </div>
 
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 import Item from './Item.vue'
 import Submenu from './utils/Submenu.vue'
@@ -39,7 +41,15 @@ export default {
     Item,
     Submenu
   },
+  data: function () {
+    return {
+      item: ''
+    }
+  },
   computed: {
+    ...mapGetters([
+      'getItem'
+    ]),
     items () {
       return store.getters.itemsForList(this.list.id)
     }
@@ -48,7 +58,8 @@ export default {
     ...mapActions([
       'deleteList',
       'editList',
-      'newItem'
+      'newItem',
+      'updateItem'
     ]),
     removeList: function (list) {
       this.deleteList(list)
@@ -60,8 +71,22 @@ export default {
       this.currentItem = {label: e.target.value, list_id: this.list.id}
       e.target.value = ''
       this.newItem(this.currentItem)
-    }
+    },
+    dropItem: function (event) {
+      event.preventDefault()
 
+      var itemId = event.dataTransfer.getData('text/plain')
+      var item = this.getItem(itemId)
+
+      event.target.classList.remove('dragged')
+
+      if (item.list_id !== this.list.id) {
+        this.updateItem({record: item, list_id: this.list.id})
+      }
+    },
+    dragOverItem: function (event, item) {
+      event.preventDefault()
+    }
   }
 }
 </script>

@@ -10,6 +10,10 @@ export const getProject = state => projectId => {
   return state.projects.filter(project => project.id === projectId)[0]
 }
 
+export const getItem = state => itemId => {
+  return state.items.filter(item => item.id === itemId)[0]
+}
+
 export const getCurrentProject = state => {
   return state.current_project
 }

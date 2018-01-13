@@ -21,6 +21,10 @@ export const newItem = (context, attrs) => {
   Item.create(context, attrs)
 }
 
+export const updateItem = (context, attrs) => {
+  Item.update(context, attrs)
+}
+
 export const deleteList = (context, list) => {
   List.destroy(context, list.id)
 }
@@ -62,5 +66,5 @@ export const logoutUser = (context, attrs) => {
 }
 
 export const checkItem = (context, item) => {
-  context.commit('toggleItem', item)
+  updateItem(context, {record: item, done: !item.done})
 }

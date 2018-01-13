@@ -31,11 +31,16 @@ export default {
     }
   },
 
-  toggleItem (state, item) {
-    item.done = !item.done
+  createItem (state, item) {
+    state.items.push(item)
   },
 
-  createItem (state, item) {
+  updateItem (state, item) {
+    var itemId = item.id
+    var index = state.items.indexOf(state.items.filter(item => item.id === itemId)[0])
+    if (index > -1) {
+      state.items.splice(index, 1)
+    }
     state.items.push(item)
   },
 
