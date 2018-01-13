@@ -28,7 +28,7 @@ new Vue({
     if (this.getCurrentProject() === null && this.getProjects().length !== 0) {
       this.setCurrentProject(this.projects[0])
     }
-    if (this.getCurrentProject() !== null) {
+    if (this.getCurrentProject() !== null && window.location.pathname === '/') {
       router.push({name: 'Project', params: { projectId: this.getCurrentProject().id }})
     }
   }
