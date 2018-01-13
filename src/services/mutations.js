@@ -18,7 +18,10 @@ export default {
   },
 
   destroyList (state, listId) {
-    state.lists.splice(state.lists.indexOf(listId), 1)
+    var index = state.lists.indexOf(state.lists.filter(list => list.id === listId)[0])
+    if (index > -1) {
+      state.lists.splice(index, 1)
+    }
   },
 
   toggleItem (state, item) {
@@ -30,7 +33,10 @@ export default {
   },
 
   destroyItem (state, itemId) {
-    state.items.splice(state.items.indexOf(itemId), 1)
+    var index = state.items.indexOf(state.items.filter(item => item.id === itemId)[0])
+    if (index > -1) {
+      state.items.splice(index, 1)
+    }
   },
 
   setCurrentProject (state, project) {
