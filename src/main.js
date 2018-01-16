@@ -5,8 +5,11 @@ import App from './App'
 import router from './router'
 import store from './services/store'
 import { mapGetters, mapMutations } from 'vuex'
+import Icon from 'vue-awesome/components/Icon'
 
 Vue.config.productionTip = false
+
+Vue.component('icon', Icon)
 
 /* eslint-disable no-new */
 new Vue({
