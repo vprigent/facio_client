@@ -1,16 +1,23 @@
 <template>
   <li class="item"
+  :class=item.id
     draggable
     @dragstart="dragItem($event, item)"
     @dragend="dropItem($event, item)"
     >
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
-    <label :for="'check-item-' + item.id">{{ item.label }}</label>
+    <input v-if="editedItem == item" type="text" v-model="item.label" @keydown.enter="changeItem">
+    <label v-else :for="'check-item-' + item.id">{{ item.label }}</label>
 
     <submenu class="pull-right">
-      <div class="actions submenu">
-        <a href='#' class="delete" v-on:click="removeItem(item)">Delete</a>
-      </div>
+      <ul class="actions submenu">
+        <li>
+          <a href='#' class="delete" @click="removeItem()">Delete</a>
+        </li>
+        <li>
+          <a href='#' class="edit" @click="editItem($event)">Edit</a>
+        </li>
+      </ul>
     </submenu>
     <div class="desc">{{ item.description }}</div>
   </li>
@@ -26,6 +33,11 @@ export default {
   components: {
     Submenu
   },
+  data: function () {
+    return {
+      editedItem: null
+    }
+  },
   computed: {
     done: {
       get: function () {
@@ -39,13 +51,23 @@ export default {
   methods: {
     ...mapActions([
       'deleteItem',
-      'checkItem'
+      'updateItem',
+      'checkItem',
+      'updateItem'
     ]),
     toggleItem: function (item) {
       this.checkItem(item)
     },
-    removeItem: function (item) {
-      this.deleteItem(item)
+    removeItem: function () {
+      this.deleteItem(this.item)
+    },
+    editItem: function (event) {
+      event.target.parentNode.parentNode.classList.remove('active')
+      this.editedItem = this.item
+    },
+    changeItem: function (event) {
+      this.updateItem({record: this.item, label: event.target.value})
+      this.editedItem = null
     },
     dragItem: function (event, item) {
       event.target.classList.add('dragged')
