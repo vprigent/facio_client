@@ -1,12 +1,18 @@
 <template>
   <div class='list'>
     <div class="title" v-bind:id="'list-' + list.id">
-      {{ list.title }}
+      <input v-if="editedList == list" v-model="list.title" @keydown.enter="changeList"></input>
+      <label v-else>{{ list.title }}</label>
 
       <submenu class="pull-right">
-        <div class="actions submenu">
-          <a href='#' class="delete" v-on:click="removeList(list)">Delete list</a>
-        </div>
+        <ul class="actions submenu">
+          <li>
+            <a href='#' class="delete" @click="removeList()">Delete list</a>
+          </li>
+          <li>
+            <a href='#' class="edit" @click="editList($event)">Edit list</a>
+          </li>
+        </ul>
       </submenu>
     </div>
 
@@ -43,7 +49,8 @@ export default {
   },
   data: function () {
     return {
-      item: ''
+      item: '',
+      editedList: null
     }
   },
   computed: {
@@ -59,13 +66,19 @@ export default {
       'deleteList',
       'editList',
       'newItem',
-      'updateItem'
+      'updateItem',
+      'updateList'
     ]),
-    removeList: function (list) {
-      this.deleteList(list)
+    removeList: function () {
+      this.deleteList(this.list)
     },
-    changeList: function (list) {
-      this.updateList(list)
+    editList: function (event) {
+      event.target.parentNode.parentNode.classList.remove('active')
+      this.editedList = this.list
+    },
+    changeList: function (event) {
+      this.updateList({record: this.list, title: event.target.value})
+      this.editedList = null
     },
     submit: function (e) {
       this.currentItem = {label: e.target.value, list_id: this.list.id}

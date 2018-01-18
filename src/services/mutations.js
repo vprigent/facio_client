@@ -13,6 +13,15 @@ export default {
     state.projects.push(project)
   },
 
+  updateProject (state, project) {
+    var projectId = project.id
+    var index = state.projects.indexOf(state.projects.filter(project => project.id === projectId)[0])
+    if (index > -1 ) {
+      state.projects.splice(index, 1)
+    }
+    state.projects.push(project)
+  },
+
   destroyProject (state, projectId) {
     var index = state.projects.indexOf(state.projects.filter(project => project.id === projectId)[0])
     if (index > -1) {
@@ -21,6 +30,15 @@ export default {
   },
 
   createList (state, list) {
+    state.lists.push(list)
+  },
+
+  updateList (state, list) {
+    var listId = list.id
+    var index = state.lists.indexOf(state.lists.filter(list => list.id === listId)[0])
+    if (index > -1 ) {
+      state.lists.splice(index, 1)
+    }
     state.lists.push(list)
   },
 

@@ -1,6 +1,6 @@
 <template>
   <li class="item"
-  :class=item.id
+    :class=item.id
     draggable
     @dragstart="dragItem($event, item)"
     @dragend="dropItem($event, item)"

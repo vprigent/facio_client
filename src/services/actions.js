@@ -13,8 +13,24 @@ export const newProject = (context, attrs) => {
   Project.create(context, attrs)
 }
 
+export const updateProject = (context, attrs) => {
+  Project.update(context, attrs)
+}
+
+export const deleteProject = (context, project) => {
+  Project.destroy(context, project.id)
+}
+
 export const newList = (context, attrs) => {
   List.create(context, attrs)
+}
+
+export const updateList = (context, attrs) => {
+  List.update(context, attrs)
+}
+
+export const deleteList = (context, list) => {
+  List.destroy(context, list.id)
 }
 
 export const newItem = (context, attrs) => {
@@ -25,16 +41,8 @@ export const updateItem = (context, attrs) => {
   Item.update(context, attrs)
 }
 
-export const deleteList = (context, list) => {
-  List.destroy(context, list.id)
-}
-
 export const deleteItem = (context, item) => {
   Item.destroy(context, item.id)
-}
-
-export const deleteProject = (context, project) => {
-  Project.destroy(context, project.id)
 }
 
 export const loginUser = (context, attrs) => {
