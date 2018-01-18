@@ -76,7 +76,7 @@ export default {
       this.editedProject = null
     },
     removeProject: function (project) {
-      this.deleteProject(currentProject)
+      this.deleteProject(project)
     }
   }
 }
