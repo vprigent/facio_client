@@ -2,8 +2,8 @@
   <div class="toggle">
     <a href="#" @click="toggleSubmenu" data-toggle="actions">
       <icon name="ellipsis-h"></icon>
-      <slot></slot>
     </a>
+    <slot></slot>
   </div>
 </template>
 
