@@ -92,3 +92,17 @@ Record.attributesHash = function (attrs) {
 Record.resourceName = function () {
   return this.name.toLowerCase()
 }
+
+Record.parse = function (records) {
+  if (records instanceof Array) {
+    var collection = []
+
+    records.forEach((record) => {
+      collection.push(new this(record))
+    })
+
+    return collection
+  } else {
+    return new this(records)
+  }
+}
