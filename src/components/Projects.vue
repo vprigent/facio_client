@@ -8,6 +8,8 @@
         :key="project.id"
         >
 
+      <input type="hidden" name="project_sequence" v-model="project.sequence">
+
       <input v-if="editedProject == project" v-model="project.name" @keydown.enter="changeProject">
 
       <router-link v-else :to="{ name: 'Project', params: {projectId: project.id} }" @click.native="setCurrentProject(project)" :class="{ active : isActive(project) }">

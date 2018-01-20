@@ -1,6 +1,8 @@
 <template>
   <div class='list'>
     <div class="title" v-bind:id="'list-' + list.id">
+      <input type="hidden" name="list_sequence" v-model="list.sequence">
+
       <input v-if="editedList == list" v-model="list.title" @keydown.enter="changeList"></input>
       <label v-else>{{ list.title }}</label>
 
@@ -81,7 +83,7 @@ export default {
       this.editedList = null
     },
     submit: function (e) {
-      this.currentItem = {label: e.target.value, list_id: this.list.id}
+      this.currentItem = {label: e.target.value, list_id: this.list.id, sequence: this.items.length}
       e.target.value = ''
       this.newItem(this.currentItem)
     },

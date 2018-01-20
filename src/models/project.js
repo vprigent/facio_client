@@ -6,8 +6,9 @@ export default class Project extends Record {
 
     this.id = attrs['id']
     this.name = attrs['name']
+    this.sequence = attrs['sequence']
   }
 }
 
-Project.attributes = ['name']
+Project.attributes = ['name', 'sequence']
 Project.tableName = 'projects'

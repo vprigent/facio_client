@@ -1,9 +1,9 @@
 export const itemsForList = state => (listId) => {
-  return state.items.filter((i) => { return i.list_id === listId })
+  return state.items.filter((i) => { return i.list_id === listId }).sort((i, j) => { return i.sequence > j.sequence })
 }
 
 export const getCurrentLists = state => {
-  return state.lists.filter((l) => { return l.project_id === state.current_project.id })
+  return state.lists.filter((l) => { return l.project_id === state.current_project.id }).sort((i, j) => { return i.sequence > j.sequence })
 }
 
 export const getProject = state => projectId => {
@@ -19,7 +19,7 @@ export const getCurrentProject = state => {
 }
 
 export const getProjects = state => {
-  return state.projects
+  return state.projects.sort((i, j) => { return i.sequence > j.sequence })
 }
 
 export const getUser = state => {
