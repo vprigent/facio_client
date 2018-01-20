@@ -1,6 +1,6 @@
 <template>
   <div class="toggle">
-    <a href="#" @click="toggleSubmenu" data-toggle="actions">
+    <a href="" @click.prevent="toggleSubmenu" data-toggle="actions">
       <icon name="ellipsis-h"></icon>
     </a>
     <slot></slot>
