@@ -10,7 +10,9 @@ export default {
   },
 
   createProject (state, project) {
-    state.projects.push(project)
+    if (state.projects.filter(p => p.id === project.id)[0] === undefined) {
+      state.projects.push(project)
+    }
   },
 
   updateProject (state, project) {
@@ -30,7 +32,9 @@ export default {
   },
 
   createList (state, list) {
-    state.lists.push(list)
+    if (state.lists.filter(l => l.id === list.id)[0] === undefined) {
+      state.lists.push(list)
+    }
   },
 
   updateList (state, list) {
@@ -50,7 +54,9 @@ export default {
   },
 
   createItem (state, item) {
-    state.items.push(item)
+    if (state.items.filter(i => i.id === item.id)[0] === undefined) {
+      state.items.push(item)
+    }
   },
 
   updateItem (state, item) {
