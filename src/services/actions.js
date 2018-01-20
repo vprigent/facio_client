@@ -76,3 +76,42 @@ export const logoutUser = (context, attrs) => {
 export const checkItem = (context, item) => {
   updateItem(context, {record: item, done: !item.done})
 }
+
+export const syncAll = (context) => {
+  axios({
+    method: 'get',
+    url: '/projects'
+  })
+  .then(function (response) {
+    response.data.data.forEach((project) => { context.commit('createProject', project) })
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+  axios({
+    method: 'get',
+    url: '/lists'
+  })
+  .then(function (response) {
+    response.data.data.forEach((list) => { context.commit('createList', list) })
+    var ids = response.data.data.map((list) => { return list.id})
+
+    ids.forEach((id) => {
+      axios({
+        method: 'get',
+        url: '/items',
+        params: {list_id: id}
+      })
+      .then(function (response) {
+        response.data.data.forEach((item) => { context.commit('createItem', item) })
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    })
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+
+}

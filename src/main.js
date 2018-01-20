@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './services/store'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import Icon from 'vue-awesome/components/Icon'
 
 Vue.config.productionTip = false
@@ -25,9 +25,13 @@ new Vue({
     ]),
     ...mapMutations([
       'setCurrentProject'
+    ]),
+    ...mapActions([
+      'syncAll'
     ])
   },
   created () {
+    this.syncAll()
     if (this.getCurrentProject() === null && this.getProjects().length !== 0) {
       this.setCurrentProject(this.projects[0])
     }
