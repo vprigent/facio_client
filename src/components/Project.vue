@@ -43,7 +43,7 @@ export default {
       this.currentList = {title: 'New List'}
     },
     submit: function (e) {
-      this.currentList = {title: e.target.value, project_id: store.state.current_project.id}
+      this.currentList = {title: e.target.value, project_id: store.state.current_project.id, sequence: store.state.projects.length}
       this.newList(this.currentList)
       this.currentList = null
     }
