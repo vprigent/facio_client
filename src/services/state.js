@@ -9,6 +9,6 @@ export default () => ({
   items: Item.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-items') || '[]')),
   lists: List.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-lists') || '[]')),
   projects: Project.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-projects') || '[]')),
-  current_user: User.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-user') || null)),
-  current_project: Project.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-project') || null))
+  current_user: User.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-user'))),
+  current_project: Project.parse(JSON.parse(window.localStorage.getItem(STORAGE_KEY + '-current-project') || '[]'))
 })
