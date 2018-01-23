@@ -93,6 +93,10 @@ export const checkItem = (context, item) => {
 }
 
 export const syncAll = (context) => {
+  if (context.state.current_user === undefined) {
+    return
+  }
+
   axios({
     method: 'get',
     url: '/projects'
@@ -109,7 +113,7 @@ export const syncAll = (context) => {
   })
   .then(function (response) {
     response.data.data.forEach((list) => { context.commit('createList', list) })
-    var ids = response.data.data.map((list) => { return list.id})
+    var ids = response.data.data.map((list) => { return list.id })
 
     ids.forEach((id) => {
       axios({

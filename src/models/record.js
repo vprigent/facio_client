@@ -102,7 +102,7 @@ Record.parse = function (records) {
     })
 
     return collection
-  } else {
+  } else if (records !== null) {
     return new this(records)
   }
 }
