@@ -28,6 +28,7 @@
       </div>
 
       <button type="submit" name="button">Submit</button>
+      <button type="cancel" name="button" @click.prevent="cancelChanges">Cancel</button>
     </form>
 
     <span v-else>
@@ -82,6 +83,9 @@ export default {
     },
     changeItem: function (event) {
       this.updateItem({record: this.item, label: this.item.label, description: this.item.description})
+      this.editedItem = null
+    },
+    cancelChanges: function (event) {
       this.editedItem = null
     },
     dragItem: function (event, item) {
