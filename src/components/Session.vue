@@ -1,6 +1,6 @@
 <template>
-  <div class="session">
-    <p>Se connecter</p>
+  <div class="session sign_in">
+    <p>Sign in</p>
     <form class="login" action="" method="post" @submit.prevent="submit">
       <div class="email">
         <label for="email">Email</label>
@@ -10,7 +10,8 @@
         <label for="password">Password</label>
         <input type="password" v-model="password" placeholder="Your password">
       </div>
-      <button type="submit" name="button" @click.prevent="submit">Connexion</button>
+      <button type="submit" name="button" @click.prevent="submit">Sign in</button>
+      <router-link :to="{ name: 'Register' }">Register</router-link>
     </form>
   </div>
 </template>

@@ -73,6 +73,21 @@ export const logoutUser = (context, attrs) => {
   })
 }
 
+export const registerUser = (context, attrs) => {
+  axios({
+    method: 'post',
+    url: '/users/register',
+    data: qs.stringify(attrs)
+  })
+  .then(function (response) {
+    // context.commit('registerUser', response.data.user)
+    router.push('/')
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+}
+
 export const checkItem = (context, item) => {
   updateItem(context, {record: item, done: !item.done})
 }

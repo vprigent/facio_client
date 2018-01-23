@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Project from '@/components/Project'
 import Session from '@/components/Session'
+import Register from '@/components/Register'
 
 Vue.use(Router)
 
@@ -12,6 +13,11 @@ export default new Router({
       path: '/login',
       name: 'Session',
       component: Session
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '/projects/:projectId',
