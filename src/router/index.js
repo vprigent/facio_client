@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Project from '@/components/Project'
+import Lists from '@/components/Lists'
 import Session from '@/components/Session'
 import Register from '@/components/Register'
 
@@ -21,8 +21,8 @@ export default new Router({
     },
     {
       path: '/projects/:projectId',
-      name: 'Project',
-      component: Project
+      name: 'Lists',
+      component: Lists
     }
   ]
 })
