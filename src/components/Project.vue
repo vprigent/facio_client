@@ -1,53 +1,43 @@
 <template>
-  <div class="lists">
-    <list
-        v-for="list in lists"
-        :key="list.id"
-        :list="list">
-    </list>
-    <div class="list new-list" v-if='currentList'>
-      <input type="text" name="title" value="" placeholder="New list" @keydown.enter="submit">
-    </div>
-    <div class="list">
-      <a href='#' class="add-list" @click="addList()">Add new list</a>
-    </div>
+  <div class="project edit">
+    <form method="post" @submit.prevent="changeProject">
+      <div class="form-group">
+        <label for="project_name">Project name</label>
+        <input v-model="project.name" type="text" name="project_name">
+      </div>
+
+      <button type="submit" name="button">Submit</button>
+      <button type="cancel" name="button" @click.prevent="cancelChanges">Cancel</button>
+    </form>
+
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { mapActions } from 'vuex'
+import router from '@/router'
 
-import List from './List.vue'
+
 import store from '@/services/store.js'
 
 export default {
-  name: 'Project',
-  components: {
-    List
-  },
-  data () {
-    return {
-      currentList: null
-    }
-  },
+  name: 'project',
+  props: ['projectId'],
   computed: {
-    lists () {
-      return store.getters.getCurrentLists
+    project () {
+      return store.getters.getProject(this.projectId)
     }
   },
   methods: {
     ...mapActions([
-      'newList'
+      'updateProject'
     ]),
-    addList: function () {
-      this.currentList = {title: 'New List'}
+    cancelChanges: function (event) {
+      router.go(-1)
     },
-    submit: function (e) {
-      this.currentList = {title: e.target.value, project_id: store.state.current_project.id, sequence: store.state.projects.length}
-      this.newList(this.currentList)
-      this.currentList = null
+    changeProject: function (event) {
+      this.updateProject({record: this.project, name: this.project.name})
     }
   }
 }
-
 </script>

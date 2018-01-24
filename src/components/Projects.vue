@@ -12,7 +12,7 @@
 
       <input v-if="editedProject == project" v-model="project.name" @keydown.enter="changeProject">
 
-      <router-link v-else :to="{ name: 'Project', params: {projectId: project.id} }" @click.native="setCurrentProject(project)" :class="{ active : isActive(project) }">
+      <router-link v-else :to="{ name: 'Lists', params: {projectId: project.id} }" @click.native="setCurrentProject(project)" :class="{ active : isActive(project) }">
         {{ project.name }}
       </router-link>
 
@@ -22,7 +22,7 @@
             <a href='#' class="delete" @click="deleteProject(project)">Delete Project</a>
           </li>
           <li>
-            <a href='#' class="edit" @click="editProject($event, project)">Update Project</a>
+            <router-link :to="{ name: 'Project', params: {projectId: project.id} }" :project="project" @click.native="setCurrentProject(project)" >Update project</router-link>
           </li>
         </ul>
       </submenu>
