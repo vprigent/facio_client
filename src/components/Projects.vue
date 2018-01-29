@@ -22,7 +22,7 @@
             <a href='#' class="delete" @click="deleteProject(project)">Delete Project</a>
           </li>
           <li>
-            <router-link :to="{ name: 'Project', params: {projectId: project.id} }" :project="project" @click.native="setCurrentProject(project)" >Update project</router-link>
+            <router-link :to="{ name: 'Project', params: {projectId: project.id} }" @click.native="setCurrentProject(project), hideSubmenu($event)" >Update project</router-link>
           </li>
         </ul>
       </submenu>
@@ -79,6 +79,9 @@ export default {
     },
     removeProject: function (project) {
       this.deleteProject(project)
+    },
+    hideSubmenu: function (event) {
+      event.target.parentNode.parentNode.classList.toggle('active')
     }
   }
 }
