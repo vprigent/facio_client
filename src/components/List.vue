@@ -20,7 +20,7 @@
 
     <ul class="items"
       @drop="dropItem($event)"
-      @dragover="dragOverItem($event)">
+      @dragover="dragOver($event)">
       <div class="new-item">
         <input type="text" name="label" value="" placeholder="New item" @keydown.enter="submit">
       </div>
@@ -99,7 +99,7 @@ export default {
         this.updateItem({record: item, list_id: this.list.id})
       }
     },
-    dragOverItem: function (event, item) {
+    dragOver: function (event) {
       event.preventDefault()
     }
   }
