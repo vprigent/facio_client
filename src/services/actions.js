@@ -41,6 +41,21 @@ export const updateItem = (context, attrs) => {
   Item.update(context, attrs)
 }
 
+export const updateItemsSequence = (context, attrs) => {
+  console.log(qs.stringify(attrs));
+  axios({
+    method: 'post',
+    url: '/items/update_sequence',
+    params: qs.stringify(attrs)
+  })
+  .then(function (response) {
+
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+}
+
 export const deleteItem = (context, item) => {
   Item.destroy(context, item.id)
 }
