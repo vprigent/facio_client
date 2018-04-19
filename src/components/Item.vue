@@ -1,11 +1,12 @@
 <template>
   <li class="item"
-    :class="[ item.id, {'editing': (editedItem == item)}]"
+    :class="[{'editing': (editedItem == item)}]"
     draggable
     @dragstart="dragItem($event, item)"
     @dragend="dropItem($event, item)"
     >
-    <input type="hidden" name="item_sequence" v-model="item.sequence">
+    <input type="integer" name="item_sequence" v-model="item.sequence">
+    <input type="hidden" name="item_id" v-model="item.id">
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
 
     <submenu class="pull-right">

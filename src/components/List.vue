@@ -95,7 +95,6 @@ export default {
       var itemId = event.dataTransfer.getData('text/plain')
       var list = event.target.closest('ul.items')
       var item_node = document.querySelector("input[name='item_id'][value='" + itemId + "']").closest('li.item')
-      item_node.style = "background-color: green"
 
       var clickX = event.clientX + window.scrollX
       var clickY = event.clientY + window.scrollY
@@ -123,9 +122,7 @@ export default {
         list.insertBefore(item_node, lastAfter.nextSibling)
       } else if (firstBefore != null) {
         list.insertBefore(item_node, firstBefore)
-      }
-
-      if (clickY - targetTop < 50 ) {
+      } else if (clickY - targetTop < 50 ) {
         list.insertBefore(item_node, lis[0])
       } else if (targetBottom - clickY < 50) {
         list.appendChild(item_node)
@@ -144,10 +141,6 @@ export default {
       if (event.target.nodeType == 3) {
         return
       }
-      var node = event.target.closest('li.item')
-      if (node != null) {
-        node.style = "background-color: red"
-      }
     },
     dragExit: function (event) {
       if (event.target.nodeType == 3) {
@@ -160,16 +153,17 @@ export default {
       }
     },
     changeItemsSequence: function (lists) {
-
       for (var i = 0; i < lists.length; i++) {
         var items = lists[i].querySelectorAll('li.item')
 
         var items_ids = []
-        for (var i = 0; i < items.length; i++) {
-          items_ids.push(items[i].querySelector("input[name='item_id'").value)
+        for (var j = 0; j < items.length; j++) {
+          items_ids.push(items[j].querySelector("input[name='item_id']").value)
         }
 
-        this.updateItemsSequence(items_ids)
+        if (items_ids.length > 0) {
+          this.updateItemsSequence(items_ids)
+        }
       }
     }
   }

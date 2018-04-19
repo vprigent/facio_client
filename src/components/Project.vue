@@ -17,7 +17,6 @@
 import { mapActions } from 'vuex'
 import router from '@/router'
 
-
 import store from '@/services/store.js'
 
 export default {
