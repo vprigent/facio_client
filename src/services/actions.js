@@ -42,7 +42,6 @@ export const updateItem = (context, attrs) => {
 }
 
 export const updateItemsSequence = (context, attrs) => {
-  console.log(qs.stringify(attrs));
   axios({
     method: 'post',
     url: '/items/update_sequence',
