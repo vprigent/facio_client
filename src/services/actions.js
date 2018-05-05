@@ -126,20 +126,10 @@ export const syncAll = (context) => {
     url: '/lists'
   })
   .then(function (response) {
-    response.data.data.forEach((list) => { context.commit('createList', list) })
-    var ids = response.data.data.map((list) => { return list.id })
-
-    ids.forEach((id) => {
-      axios({
-        method: 'get',
-        url: '/items',
-        params: {list_id: id}
-      })
-      .then(function (response) {
-        response.data.data.forEach((item) => { context.commit('createItem', item) })
-      })
-      .catch(function (error) {
-        console.log(error)
+    response.data.data.forEach((list) => {
+      context.commit('createList', list)
+      list.items.forEach((item) => {
+        context.commit('createItem', item)
       })
     })
   })
