@@ -8,7 +8,7 @@ export default class Item extends Record {
     this.label = attrs['label']
     this.description = attrs['description']
     this.sequence = attrs['sequence']
-    this.done = false
+    this.done = attrs['done']
     this.list_id = attrs['list_id']
   }
 }
