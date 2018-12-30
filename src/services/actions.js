@@ -45,7 +45,7 @@ export const updateItemsSequence = (context, attrs) => {
   axios({
     method: 'post',
     url: '/items/update_sequence',
-    params: qs.stringify(attrs)
+    params: attrs
   })
   .then(function (response) {
 
