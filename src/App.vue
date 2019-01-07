@@ -4,7 +4,7 @@
 <template>
   <div id="app">
     <div class="topbar">
-      <div class="login" v-if="current_user == null">
+      <div class="login" v-if="user == null">
         <a href="/login">Login</a>
       </div>
       <div class="logout" v-else>
@@ -27,7 +27,7 @@ export default {
     Dashboard
   },
   computed: {
-    current_user () {
+    user () {
       return store.getters.getUser
     }
   },

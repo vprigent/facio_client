@@ -83,7 +83,11 @@ export const logoutUser = (context, attrs) => {
     context.commit('deleteUser')
   })
   .catch(function (error) {
-    console.log(error)
+    if (error.response.status == 403) {
+      context.commit('deleteUser')
+    } else {
+      console.log(error)
+    }
   })
 }
 

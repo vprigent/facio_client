@@ -22,6 +22,6 @@ export const getProjects = state => {
   return state.projects.sort((i, j) => { return i.sequence > j.sequence })
 }
 
-export const getUser = state => {
+export const getUser = state => {  
   return state.current_user
 }
