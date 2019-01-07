@@ -48,7 +48,9 @@ export const updateItemsSequence = (context, attrs) => {
     params: attrs
   })
   .then(function (response) {
-
+    response.data.data.forEach((item) =>
+      { context.commit('updateItemSequence', item) }
+    )
   })
   .catch(function (error) {
     console.log(error)
@@ -125,6 +127,7 @@ export const syncAll = (context) => {
   .catch(function (error) {
     console.log(error)
   })
+
   axios({
     method: 'get',
     url: '/lists'

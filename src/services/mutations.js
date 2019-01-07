@@ -68,6 +68,13 @@ export default {
     state.items.push(item)
   },
 
+  updateItemSequence (state, item) {
+    var itemId = item.id
+    var sequence = item.sequence
+
+    state.items.filter(item => item.id === itemId)[0].updateSequence(sequence)
+  },
+
   destroyItem (state, itemId) {
     var index = state.items.indexOf(state.items.filter(item => item.id === itemId)[0])
     if (index > -1) {

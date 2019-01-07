@@ -11,6 +11,10 @@ export default class Item extends Record {
     this.done = attrs['done']
     this.list_id = attrs['list_id']
   }
+
+  updateSequence (sequence) {
+    this.sequence = sequence
+  }
 }
 
 Item.attributes = ['label', 'done', 'description', 'sequence', 'list_id']

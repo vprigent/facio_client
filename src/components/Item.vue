@@ -5,7 +5,6 @@
     @dragstart="dragItem($event, item)"
     @dragend="dropItem($event, item)"
     >
-    <input type="integer" name="item_sequence" v-model="item.sequence">
     <input type="hidden" name="item_id" v-model="item.id">
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
 
