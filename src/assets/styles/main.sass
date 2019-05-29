@@ -1,23 +1,22 @@
 @import 'variables'
+@import '~milligram-sass'
+
+@import 'override'
+
 @import 'components/sidebar'
 @import 'components/lists'
 @import 'components/items'
 @import 'components/projects'
 @import 'components/form'
-@import 'override'
 
 body
   margin: 0
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  color: $color-grey-darker
-
-h1, h2
-  font-weight: normal
 
 .topbar
-  height: 25px
+  height: 35px
   padding: 5px
   background-color: $color-blue-light
 
@@ -33,6 +32,7 @@ h1, h2
   min-height: 95vh
   display: flex
   background-color: $color-grey
+  width: 100%
 
 a
   color: $color-blue
@@ -46,10 +46,9 @@ a
 
 .pull-right
   float: right
+  position: relative
 
 .toggle
-  display: inline-block
-  position: relative
   height: 20px
 
 [data-toggle]
@@ -61,6 +60,7 @@ a
   background: white
   border-radius: 2px
   padding: 0.4em
+  margin: 0
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18)
   min-width: 140px
 

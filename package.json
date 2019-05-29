@@ -13,9 +13,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "uuid": "^3.1.0",
     "axios": "^0.17.1",
+    "milligram-sass": "^1.3.0",
     "qs": "^6.5.1",
+    "uuid": "^3.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
