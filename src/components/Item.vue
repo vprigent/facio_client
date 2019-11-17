@@ -8,17 +8,6 @@
     <input type="hidden" name="item_id" v-model="item.id">
     <input :id="'check-item-' + item.id" v-model="done" type="checkbox">
 
-    <submenu class="pull-right">
-      <ul class="actions submenu">
-        <li>
-          <a href='' class="delete" @click.prevent="removeItem()">Delete</a>
-        </li>
-        <li>
-          <a href='' class="edit" @click.prevent="editItem($event)">Edit</a>
-        </li>
-      </ul>
-    </submenu>
-
     <form v-if="editedItem == item" method="post" @submit.prevent="changeItem">
       <input v-model="item.label" type="text" name="item_label">
 
@@ -36,6 +25,17 @@
 
       <div class="desc">{{ item.description }}</div>
     </span>
+
+    <submenu class="pull-right">
+      <ul class="actions submenu">
+        <li>
+          <a href='' class="delete" @click.prevent="removeItem()">Delete</a>
+        </li>
+        <li>
+          <a href='' class="edit" @click.prevent="editItem($event)">Edit</a>
+        </li>
+      </ul>
+    </submenu>
   </li>
 </template>
 

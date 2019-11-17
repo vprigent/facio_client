@@ -4,6 +4,7 @@ import Lists from '@/components/Lists'
 import Session from '@/components/Session'
 import Register from '@/components/Register'
 import Project from '@/components/Project'
+import Calendar from '@/components/calendar/Calendar'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       name: 'Project',
       component: Project,
       props: (route) => ({projectId: route.params.projectId})
+    },
+    {
+      path: '/calendar',
+      name: 'Calendar',
+      component: Calendar
     }
   ]
 })

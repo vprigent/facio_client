@@ -1,6 +1,6 @@
 <template>
   <div class='list'>
-    <div class="title" v-bind:id="'list-' + list.id" v-bind:data-id="list.id">
+    <div class="title" v-bind:data-id="list.id">
       <input type="hidden" name="list_sequence" v-model="list.sequence">
 
       <input v-if="editedList == list" v-model="list.title" @keydown.enter="changeList"></input>
@@ -32,7 +32,6 @@
       </item>
     </ul>
   </div>
-
 </template>
 
 <script>
